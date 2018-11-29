@@ -1,6 +1,6 @@
 
 public class Categoria {
-	private String idCat,nombreCategoria;
+	private /*static*/ String idCat,nombreCategoria;
 	public subCategorias [] nombresSubCategorias;
 	public int numSubCategorias;
 	public Categoria() {
@@ -11,10 +11,10 @@ public class Categoria {
 		idCat=id;
 		numSubCategorias=0;
 	}
-	public String getNombreCat() {
+	public /*static*/ String getNombreCat() {
 		return nombreCategoria;
 	}
-	public String getIdCat() {
+	public /*static*/ String getIdCat() {
 		return idCat;
 	}
 	public void setNombresSubCategorias(String [] nombresSCat) {

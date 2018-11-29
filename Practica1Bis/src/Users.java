@@ -23,16 +23,18 @@ public class Users {
 		//System.out.println("Construyendo usuarios");
 		nombreUsers=new User[100];
 		int i=0;
-		/*try {
+		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-		} catch (ClassNotFoundException e1) {
+			this.controlador="sun.jdbc.odbc.JdbcOdbcDriver";
+			this.nombre_bd="Amazonia.accdb";
+			this.usuarioBD="";
+		    this.passwordBD="";
+	    
+		} 
+		catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		this.controlador="sun.jdbc.odbc.JdbcOdbcDriver";
-		this.nombre_bd="Amazonia.accdb";
-		this.usuarioBD="";
-	    this.passwordBD="";
 	    try{
 	        conexion=DriverManager.getConnection("jdbc:ucanaccess://"+this.nombre_bd,this.usuarioBD,this.passwordBD);
 	    }catch (SQLException e){
@@ -48,13 +50,13 @@ public class Users {
 	    catch (SQLException e) {
 	        e.printStackTrace();
 
-	    }
+	    }*/
 	    ResultSet rs;
 	    String sql="SELECT * FROM Usuarios";
 	    PreparedStatement stm;
 	    try {
 			stm=conexion.prepareStatement(sql);
-			stm.setString(1, "12345");
+			//stm.setString(1, "12345");
 			rs=stm.executeQuery();
 			while(rs.next()) {
 				String nombre = rs.getString("Nombre"); 
@@ -64,12 +66,13 @@ public class Users {
 				numUsers++;
 				i++;
 			}
+			conexion.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	    
-	    try {
+	   /* try {
 			FileReader fr = new FileReader("users.txt"); 
 			BufferedReader br = new BufferedReader(fr);
 			String usuario=br.readLine();
@@ -89,7 +92,7 @@ public class Users {
 		}
 		catch(IOException iox) {
 			System.out.println(iox.getMessage());
-		}
+		}*/
 		
 		/*nombreUsers[0]=new User("Javier", "javier@gmail.com", "javier123");
 		nombreUsers[1]=new User("Santiago",	"santiperezci@gmail.com", "pass123");
@@ -119,6 +122,40 @@ public class Users {
 		User nuevoUser;
 		nuevoUser=new User(usuario,email,contraseña);
 		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			this.controlador="sun.jdbc.odbc.JdbcOdbcDriver";
+			this.nombre_bd="Amazonia.accdb";
+			this.usuarioBD="";
+		    this.passwordBD="";
+	    
+		} 
+		catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    try{
+	        conexion=DriverManager.getConnection("jdbc:ucanaccess://"+this.nombre_bd,this.usuarioBD,this.passwordBD);
+	    }catch (SQLException e){
+	         e.printStackTrace();
+	         return false;
+	    }
+	    try {
+			PreparedStatement stmt = conexion.prepareStatement("INSERT INTO Usuarios VALUES (?,?,?)");
+			stmt.setString(1,usuario);
+			stmt.setString(2,contraseña);
+			stmt.setString(3,email);
+			stmt.executeUpdate();
+			conexion.close();
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	    
+	    
+		/*try {
 			FileWriter fr=new FileWriter("users.txt",true);
 			fr.write("\n" + usuario + "," + email + "," + contraseña);
 			fr.flush();
@@ -129,7 +166,9 @@ public class Users {
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
-		}
-		return added;
+		}*/
+		
+		//return true;
 	}
+	
 }

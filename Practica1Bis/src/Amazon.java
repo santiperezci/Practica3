@@ -15,8 +15,8 @@ public class Amazon {
 		leerPropiedades();
 		usuarios=new Users();
 		if(usuarios.verificar(usuario)==false) {
-			//System.out.println("Usuario no registrado");
-			registrarUsuarioW();
+			System.out.println("Usuario no registrado");
+			registrarUsuario();
 		}
 		else {
 			usuarioRegistrado=true;

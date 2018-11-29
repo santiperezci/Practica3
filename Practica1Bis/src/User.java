@@ -3,18 +3,18 @@ import java.util.Properties;
 
 public class User {
 protected String name;
-protected String email;
-protected String password;
+protected static  String email;
+protected static String password;
 
 public String getName(){
 	return name;
 }
 
-public String getEmail(){
+public  static String getEmail(){
 	return email;
 }
 
-public String getPassword(){
+public static String getPassword(){
 	return password;
 }
 
